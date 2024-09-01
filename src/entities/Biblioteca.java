@@ -32,7 +32,32 @@ public class Biblioteca {
         System.out.println("Usuario " + usuario.getNome() + " cadastrado!");
     }
 
-    public void realizarEmprestimo(){
-        livros.
+    // Criacao dos metodos relizarEmprestimo(), realizarDevolucao(),
+    // listarLivrosDisponiveis(), listarLivrosEmprestados()
+    public void realizarEmprestimo(Livro livro) {
+        livro.emprestar();
+        System.out.println("O livro foi emprestado com sucesso!");
     }
+
+    public void realizarDevolucao(Livro livro) {
+        livro.devolver();
+        System.out.println("Livro devolvido com sucesso!");
+    }
+
+    public void listarLivrosDisponiveis() {
+        for (Livro livro : livros) {
+            if (livro.isDisponivel()) {
+                System.out.println(livro.getTitulo());
+            }
+        }
+    }
+
+    public void listarLivrosEmprestados() {
+        for (Livro livro : livros) {
+            if (!livro.isDisponivel()) {
+                System.out.println(livro.getTitulo());
+            }
+        }
+    }
+    // Metodo para buscar livro escolhido pelo usuario
 }
