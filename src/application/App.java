@@ -119,8 +119,27 @@ public class App {
                 case 5:
                     // Listar livros. Fazer um menu de opcoes para listar livros disponiveis e
                     // livros emprestados
-                    break;
-                default:
+                    System.out.println("------Listagem------");
+                    System.out.println("1 - Listar livros disponiveis");
+                    System.err.println("2 - Listar livros emprestados");
+                    System.out.printf("Escolha uma opcao: ");
+                    int lista = sc.nextInt();
+                    switch (lista) {
+                        case 1:
+                            System.out.println("------Livros disponiveis------");
+                            biblioteca.listarLivrosDisponiveis();
+                            break;
+
+                        case 2:
+                            System.out.println("------Livros emprestados------");
+                            biblioteca.listarLivrosEmprestados();
+                            break;
+
+                        default:
+                            System.out.println("Opcao invalida! Retornando ao menu principal.");
+                            break;
+                    }
+
                     break;
             }
         } while (opcao != 6);

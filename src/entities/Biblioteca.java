@@ -106,6 +106,7 @@ public class Biblioteca {
         for (Livro livro : livros) {
             if (livro.isDisponivel()) {
                 System.out.println(livro.getTitulo());
+                System.out.println();
             }
         }
     }
@@ -114,6 +115,7 @@ public class Biblioteca {
         for (Livro livro : livros) {
             if (!livro.isDisponivel()) {
                 System.out.println(livro.getTitulo());
+                System.out.println();
             }
         }
     }

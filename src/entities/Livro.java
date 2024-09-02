@@ -37,4 +37,9 @@ public class Livro {
         this.disponivel = false;
     }
 
+    @Override
+    public String toString() {
+        return "Titulo: " + titulo + " Autor: " + autor + " Ano de publicacao: " + anoPublicacao;
+    }
+
 }
