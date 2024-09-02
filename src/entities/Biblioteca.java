@@ -77,6 +77,30 @@ public class Biblioteca {
     }
 
     // realizarDevolucao()
+    public void realizarDevolucao(Livro livro, Usuario usuario) {
+        if (livro.isDisponivel()) {
+            System.out.println("O livro ja esta na biblioteca!");
+            return;
+        }
+
+        if (usuario instanceof Aluno) {
+            Aluno aluno = (Aluno) usuario;
+            if (aluno.getLivrosEmprestados() == null) {
+                System.out.println("O aluno nao possui livros emprestados!");
+                return;
+            }
+            aluno.setLivrosEmprestados(null);
+        } else if (usuario instanceof Professor) {
+            Professor professor = (Professor) usuario;
+            if (professor.getLivros().size() == 0) {
+                System.out.println("O professor nao tem livros emprestados!");
+                return;
+            }
+            professor.removeLivroEmprestado(livro);
+        }
+        livro.devolver();
+        System.out.println("O livro " + livro.getTitulo() + " foi devolvido!");
+    }
 
     public void listarLivrosDisponiveis() {
         for (Livro livro : livros) {

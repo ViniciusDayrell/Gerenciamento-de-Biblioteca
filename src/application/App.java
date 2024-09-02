@@ -58,7 +58,7 @@ public class App {
                     switch (tipo) {
                         case 1:
                             System.out.println("------Cadastro de Aluno------");
-                            System.out.printf("Nome:");
+                            System.out.printf("Nome: ");
                             String nome = sc.nextLine();
                             Aluno aluno = new Aluno(nome);
                             biblioteca.regitrarUsuario(aluno);
@@ -81,15 +81,15 @@ public class App {
                 case 3:
                     System.out.println("------Emprestimo------");
                     System.out.printf("Usuario: ");
-                    String nome = sc.nextLine();
-                    Usuario usuario = biblioteca.buscarUsuario(nome);
+                    String nomeUsu1 = sc.nextLine();
+                    Usuario usuario = biblioteca.buscarUsuario(nomeUsu1);
                     if (usuario == null) {
                         System.out.println("Usuario inxistente!");
                         break;
                     }
                     System.out.printf("Titulo: ");
-                    String tituloLivro = sc.nextLine();
-                    Livro livroEmprestado = biblioteca.buscarLivro(tituloLivro);
+                    String tituloLivroEmprestado = sc.nextLine();
+                    Livro livroEmprestado = biblioteca.buscarLivro(tituloLivroEmprestado);
                     if (livroEmprestado == null) {
                         System.out.println("Livro nao cadastrado!");
                         break;
@@ -98,7 +98,22 @@ public class App {
                     break;
 
                 case 4:
-                    // Mecanismo de devolucao de livro
+                    System.out.println("------Devolucao------");
+                    System.out.printf("Usuario: ");
+                    String nomeUsu2 = sc.nextLine();
+                    Usuario usuarioDev = biblioteca.buscarUsuario(nomeUsu2);
+                    if (usuarioDev == null) {
+                        System.out.println("Usuario inxistente!");
+                        break;
+                    }
+                    System.out.printf("Titulo: ");
+                    String tituloLivroDevolvido = sc.nextLine();
+                    Livro livroDevolvido = biblioteca.buscarLivro(tituloLivroDevolvido);
+                    if (livroDevolvido == null) {
+                        System.out.println("Livro nao cadastrado!");
+                        break;
+                    }
+                    biblioteca.realizarDevolucao(livroDevolvido, usuarioDev);
                     break;
 
                 case 5:

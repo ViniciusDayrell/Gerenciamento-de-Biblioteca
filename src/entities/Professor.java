@@ -17,10 +17,8 @@ public class Professor extends Usuario {
         return livros;
     }
 
-    public void mostrarLivros() {
-        for (Livro livro : livros) {
-            System.out.println(livro);
-        }
+    public void removeLivroEmprestado(Livro livro) {
+        livros.remove(livro);
     }
 
 }
