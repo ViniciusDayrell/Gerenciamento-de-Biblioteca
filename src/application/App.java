@@ -2,15 +2,18 @@ package application;
 
 import java.util.Scanner;
 
+import entities.Aluno;
 import entities.Biblioteca;
 import entities.Livro;
+import entities.Professor;
+import entities.Usuario;
 
 /*
  * O sistema deve incluir classes Biblioteca, Livro, Usuario, Professor e Aluno
  * Classe professor e Aluno herda da classe Usuario
  * Professor pode emprestar ate 3 livros
  * Aluno pode emprestar 1 livro
- * O sistema deve conter um menu que permita: Adicionar livros, Registrar usuario, 
+ * O sistema deve conter um menu que permita: Adicionar livros, Registrar usuario,
  * realizar emprestimos e devolucoes e listar livros disponiveis e emprestados
  */
 public class App {
@@ -51,21 +54,47 @@ public class App {
                     System.out.println("2 - Cadastrar professor");
                     System.out.printf("Escolha uma opcao: ");
                     int tipo = sc.nextInt();
+                    sc.nextLine();
                     switch (tipo) {
                         case 1:
-                            // Cadastro de professor
+                            System.out.println("------Cadastro de Aluno------");
+                            System.out.printf("Nome:");
+                            String nome = sc.nextLine();
+                            Aluno aluno = new Aluno(nome);
+                            biblioteca.regitrarUsuario(aluno);
                             break;
 
                         case 2:
-                            // Cadastro de aluno
+                            System.out.println("------Cadastro de Professor------");
+                            System.out.printf("Nome:");
+                            String nomeProf = sc.nextLine();
+                            Professor professor = new Professor(nomeProf);
+                            biblioteca.regitrarUsuario(professor);
                             break;
+
                         default:
                             System.out.println("Opcao invalida! Retornando ao menu principal.");
                             break;
                     }
+                    break;
 
                 case 3:
-                    // Mecanismo de emprestimo de livro escolhido pelo usuario
+                    System.out.println("------Emprestimo------");
+                    System.out.printf("Usuario: ");
+                    String nome = sc.nextLine();
+                    Usuario usuario = biblioteca.buscarUsuario(nome);
+                    if (usuario == null) {
+                        System.out.println("Usuario inxistente!");
+                        break;
+                    }
+                    System.out.printf("Titulo: ");
+                    String tituloLivro = sc.nextLine();
+                    Livro livroEmprestado = biblioteca.buscarLivro(tituloLivro);
+                    if (livroEmprestado == null) {
+                        System.out.println("Livro nao cadastrado!");
+                        break;
+                    }
+                    biblioteca.realizarEmprestimo(livroEmprestado, usuario);
                     break;
 
                 case 4:

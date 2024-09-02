@@ -1,14 +1,26 @@
 package entities;
 
+import java.util.List;
+
 public class Professor extends Usuario {
-    private int livrosEmprestados;
+    private List<Livro> livros;
 
     public Professor(String nome) {
         super(nome);
-        livrosEmprestados = 3;
     }
 
-    public int getLivrosEmprestados() {
-        return livrosEmprestados;
+    public void setLivros(Livro livro) {
+        livros.add(livro);
     }
+
+    public List<Livro> getLivros() {
+        return livros;
+    }
+
+    public void mostrarLivros() {
+        for (Livro livro : livros) {
+            System.out.println(livro);
+        }
+    }
+
 }

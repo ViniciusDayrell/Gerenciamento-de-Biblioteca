@@ -32,17 +32,51 @@ public class Biblioteca {
         System.out.println("Usuario " + usuario.getNome() + " cadastrado!");
     }
 
-    // Criacao dos metodos relizarEmprestimo(), realizarDevolucao(),
-    // listarLivrosDisponiveis(), listarLivrosEmprestados()
-    public void realizarEmprestimo(Livro livro) {
-        livro.emprestar();
-        System.out.println("O livro foi emprestado com sucesso!");
+    public Usuario buscarUsuario(String nome) {
+        for (Usuario usuario : usuarios) {
+            if (usuario.getNome().equals(nome)) {
+                return usuario;
+            }
+        }
+        return null;
     }
 
-    public void realizarDevolucao(Livro livro) {
-        livro.devolver();
-        System.out.println("Livro devolvido com sucesso!");
+    public Livro buscarLivro(String nome) {
+        for (Livro livro : livros) {
+            if (livro.getTitulo().equals(nome)) {
+                return livro;
+            }
+        }
+        return null;
     }
+
+    public void realizarEmprestimo(Livro livro, Usuario usuario) {
+        if (!livro.isDisponivel()) {
+            System.out.println("O livro ja esta emprestado!");
+            return;
+        }
+
+        if (usuario instanceof Aluno) {
+            Aluno aluno = (Aluno) usuario;
+            if (aluno.getLivrosEmprestados() != null) {
+                System.out.println("O aluno ja possui um livro emprestado!");
+                return;
+            }
+            aluno.setLivrosEmprestados(livro);
+        } else if (usuario instanceof Professor) {
+            Professor professor = (Professor) usuario;
+            if (professor.getLivros().size() >= 3) {
+                System.out.println("O professor chegou ao limite de livros emprestados!");
+                return;
+            }
+            professor.setLivros(livro);
+        }
+        livro.emprestar();
+        System.out.println("O livro " + livro.getTitulo() + " foi emprestado!");
+
+    }
+
+    // realizarDevolucao()
 
     public void listarLivrosDisponiveis() {
         for (Livro livro : livros) {
@@ -59,5 +93,4 @@ public class Biblioteca {
             }
         }
     }
-    // Metodo para buscar livro escolhido pelo usuario
 }

@@ -4,15 +4,18 @@ package entities;
  * Implementar um metodo para atualizar o atributo livrosEmprestados
  */
 public class Aluno extends Usuario {
-    private int livrosEmprestados;
+    private Livro livro;
 
     public Aluno(String nome) {
         super(nome);
-        this.livrosEmprestados = 1;
     }
 
-    public int getLivrosEmprestados() {
-        return livrosEmprestados;
+    public Livro getLivrosEmprestados() {
+        return livro;
+    }
+
+    public void setLivrosEmprestados(Livro livro) {
+        this.livro = livro;
     }
 
 }
