@@ -13,7 +13,6 @@ import entities.Livro;
  * O sistema deve conter um menu que permita: Adicionar livros, Registrar usuario, 
  * realizar emprestimos e devolucoes e listar livros disponiveis e emprestados
  */
-//SUBIR NO GITHUB - Implementção de um menu de opcoes para gerenciar as funcionalidades do sistema de Bibliotecas
 public class App {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
