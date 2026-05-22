@@ -34,7 +34,7 @@ public class Livro {
     }
 
     public void devolver() {
-        this.disponivel = false;
+        this.disponivel = true;
     }
 
     @Override

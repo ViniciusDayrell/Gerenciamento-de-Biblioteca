@@ -28,8 +28,15 @@ public class Biblioteca {
     }
 
     public void regitrarUsuario(Usuario usuario) {
+        if (usuario instanceof Aluno) {
+            usuario.setStrategy(new EmprestimoAlunoStrategy());
+        } else if (usuario instanceof Professor) {
+            usuario.setStrategy(new EmprestimoProfessorStrategy());
+        }
+
         usuarios.add(usuario);
         System.out.println("Usuario " + usuario.getNome() + " cadastrado!");
+
     }
 
     public Usuario buscarUsuario(String nome) {
@@ -56,24 +63,15 @@ public class Biblioteca {
             return;
         }
 
-        if (usuario instanceof Aluno) {
-            Aluno aluno = (Aluno) usuario;
-            if (aluno.getLivrosEmprestados() != null) {
-                System.out.println("O aluno ja possui um livro emprestado!");
-                return;
-            }
-            aluno.setLivrosEmprestados(livro);
-        } else if (usuario instanceof Professor) {
-            Professor professor = (Professor) usuario;
-            if (professor.getLivros().size() >= 3) {
-                System.out.println("O professor chegou ao limite de livros emprestados!");
-                return;
-            }
-            professor.setLivros(livro);
+        if (!usuario.getStrategy().podeEmprestar(usuario)) {
+            System.out.println("Limite atingido!");
+            return;
         }
-        livro.emprestar();
-        System.out.println("O livro " + livro.getTitulo() + " foi emprestado!");
 
+        usuario.getStrategy().emprestarLivro(usuario, livro);
+
+        System.out.println("O livro " + livro.getTitulo() + " foi emprestado!");
+        System.out.println();
     }
 
     // realizarDevolucao()
@@ -83,29 +81,18 @@ public class Biblioteca {
             return;
         }
 
-        if (usuario instanceof Aluno) {
-            Aluno aluno = (Aluno) usuario;
-            if (aluno.getLivrosEmprestados() == null) {
-                System.out.println("O aluno nao possui livros emprestados!");
-                return;
-            }
-            aluno.setLivrosEmprestados(null);
-        } else if (usuario instanceof Professor) {
-            Professor professor = (Professor) usuario;
-            if (professor.getLivros().size() == 0) {
-                System.out.println("O professor nao tem livros emprestados!");
-                return;
-            }
-            professor.removeLivroEmprestado(livro);
-        }
-        livro.devolver();
+        usuario.getStrategy().devolverLivro(usuario, livro);
+
         System.out.println("O livro " + livro.getTitulo() + " foi devolvido!");
     }
 
     public void listarLivrosDisponiveis() {
         for (Livro livro : livros) {
             if (livro.isDisponivel()) {
-                System.out.println(livro.getTitulo());
+                System.out.println(livro.toString());
+                System.out.println();
+            } else {
+                System.out.println("Nenhum livro disponivel!");
                 System.out.println();
             }
         }

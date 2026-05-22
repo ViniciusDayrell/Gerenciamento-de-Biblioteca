@@ -9,12 +9,7 @@ import entities.Professor;
 import entities.Usuario;
 
 /*
- * O sistema deve incluir classes Biblioteca, Livro, Usuario, Professor e Aluno
- * Classe professor e Aluno herda da classe Usuario
- * Professor pode emprestar ate 3 livros
- * Aluno pode emprestar 1 livro
- * O sistema deve conter um menu que permita: Adicionar livros, Registrar usuario,
- * realizar emprestimos e devolucoes e listar livros disponiveis e emprestados
+    REALIZAR O TESTE DA DEVOLUÇÃO DOS LIVROS
  */
 public class App {
     public static void main(String[] args) throws Exception {
